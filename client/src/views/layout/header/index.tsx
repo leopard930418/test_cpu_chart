@@ -9,9 +9,12 @@ import TuneIcon from "@mui/icons-material/Tune";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Logo from "../../components/Logo";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({ color = false, ...props }) {
+  const navigation = useNavigate();
   const isPhoneMode = useMediaQuery("(max-width:600px)");
+  const accessToken = localStorage.getItem("accessToken");
 
   return (
     <div className="fixed w-full bg-[#0c0d0f] z-50 py-2 px-4 sm:px-10   bg-gradient-to-t from-[#111316] to-[#0c0d0f]">
@@ -37,7 +40,7 @@ export default function Header({ color = false, ...props }) {
           xs={0}
           sx={{ display: { xs: "none", md: "block" } }}
         >
-          <div className="flex flex-row justify-end xs:space-x-10 md:space-x-8">
+          <div className="flex flex-row justify-end items-center xs:space-x-10 md:space-x-8">
             {isPhoneMode ? (
               <ViewModuleIcon style={{ color: "#d1d5db" }} fontSize="large" />
             ) : (
@@ -57,9 +60,26 @@ export default function Header({ color = false, ...props }) {
               fontSize="large"
               className="hover:text-white cursor-pointer"
             /> */}
-            <div className="border-2 border-white text-white text-2xl font-bold">
-              Login
-            </div>
+            {accessToken ? (
+              <div
+                className="px-8 py-1 cursor-pointer rounded-full  border-2 border-white text-white text-2xl font-bold"
+                onClick={() => {
+                  navigation("/auth/signIn");
+                  localStorage.clear();
+                }}
+              >
+                SingOut
+              </div>
+            ) : (
+              <div
+                className="px-8 py-1 cursor-pointer rounded-full  border-2 border-white text-white text-2xl font-bold"
+                onClick={() => {
+                  navigation("/auth/signIn");
+                }}
+              >
+                Login
+              </div>
+            )}
           </div>
         </Grid>
         <Grid item lg={6} md={6} sm={6} xs={6} className="flex justify-end">

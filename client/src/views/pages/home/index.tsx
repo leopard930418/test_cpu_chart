@@ -1,4 +1,4 @@
-import { Divider, Stack, TextField, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MainChart from "./MainChart";
@@ -8,10 +8,13 @@ import authHeader from "../../../auth/auth";
 export default function Home() {
   const [cpuUsageData, setCpuUsageData] = useState([]);
 
-  // const navigation = useNavigate();
-  // useEffect(() => {
-  //   navigation("/auth/signIn");
-  // }, []);
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      navigation("/auth/signIn");
+    }
+  }, []);
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/data/", {
