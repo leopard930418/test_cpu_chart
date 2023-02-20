@@ -7,6 +7,7 @@ import { authenticated, authMiddleware } from "./controllers/auth.controller";
 import authRoutes from "./routes/auth.routes";
 import itemsRoutes from "./routes/items.routes";
 import dataRoutes from "./routes/data.routes";
+import usageRoutes from "./routes/usage.routes";
 
 const port = 8080;
 export const app = express();
@@ -23,3 +24,4 @@ dao.setupDbForDev();
 app.use("/api/auth", authRoutes);
 app.use("/api/items", authenticated, itemsRoutes);
 app.use("/api/data", dataRoutes);
+app.use("/api/usage", usageRoutes);

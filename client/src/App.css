@@ -17,3 +17,19 @@
 .highcharts-credits {
   display:none;
 }
+
+
+.csv-input {
+  padding: 10px;
+  display: block;
+  margin: 15px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.csv-label {
+  color:white;
+  display: none;
+  margin: 15px auto;
+  border-radius: 5px;
+}
+

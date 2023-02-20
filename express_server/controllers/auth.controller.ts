@@ -18,14 +18,14 @@ const decodeToken = (token) => {
 }
 
 export const authMiddleware = async (req: Request, res: Response, next: Function) => {
-  const token = req.header('Access-Token');
+  const token = req.headers["x-access-token"];
   if (!token) {
     return next();
   }
 
   try {
-    const decoded = decodeToken(token);
-    const { userId } = decoded.body;
+    const decoded:any = decodeToken(token);
+    const { userId } = decoded?.body;
     const user: User = <User>await repo.getUserById(userId)
     if (user) {
       req.body.userId = userId;
